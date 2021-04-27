@@ -4,13 +4,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+
 import android.widget.TextView
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.kameronramah.todo.R
+import com.kameronramah.todo.network.TasksDiffCallBack
 
-class TaskListAdapter(private val taskList: List<Task>) : RecyclerView.Adapter<TaskListAdapter.TaskViewHolder>() {
+
+class TaskListAdapter() : ListAdapter<Task, TaskListAdapter.TaskViewHolder>(TasksDiffCallBack) {
 
     var onDeleteTask: ((Task) -> Unit)? = null
     var onEditTask: ((Task) -> Unit)? = null
@@ -37,12 +39,6 @@ class TaskListAdapter(private val taskList: List<Task>) : RecyclerView.Adapter<T
 
     }
 
-
-
-    override fun getItemCount(): Int {
-        return taskList.size
-    }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
         val itemView = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_task, parent, false)
@@ -50,7 +46,7 @@ class TaskListAdapter(private val taskList: List<Task>) : RecyclerView.Adapter<T
     }
 
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
-        holder.bind(taskList[position])
+        holder.bind(currentList[position])
     }
 
 }
