@@ -25,3 +25,9 @@ q
 Aapp/src/main/java/com/kameronramah/todo/network/TaskWebService.kt,d\c\dcb42ca570cefbe935494e7ec5b1901b9bb71735
 r
 Bapp/src/main/java/com/kameronramah/todo/network/TasksRepository.kt,7\b\7bca4f0641b5ca658a36010dc27e371a7e12fc5c
+t
+Dapp/src/main/java/com/kameronramah/todo/network/TasksDiffCallBack.kt,c\9\c9a4c993f464b522b8127050a53d6ed4de84701c
+u
+Eapp/src/main/java/com/kameronramah/todo/tasklist/TaskListViewModel.kt,a\7\a727343aafc62df5df1d54fb63f93a965003ae0c
+t
+Dapp/src/main/java/com/kameronramah/todo/userinfo/UserInfoActivity.kt,a\5\a574f69b3a4aec2be76766d40e6dbc72a0df09d9

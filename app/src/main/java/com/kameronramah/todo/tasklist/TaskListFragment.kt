@@ -6,18 +6,22 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
+import coil.transform.CircleCropTransformation
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.kameronramah.todo.R
 import com.kameronramah.todo.network.Api
 import com.kameronramah.todo.network.TasksRepository
 import com.kameronramah.todo.task.TaskActivity
 import com.kameronramah.todo.task.TaskActivity.Companion.ADD_TASK_REQUEST_CODE
+import com.kameronramah.todo.userinfo.UserInfoActivity
 import kotlinx.coroutines.launch
 
 class TaskListFragment : Fragment() {
@@ -45,12 +49,16 @@ class TaskListFragment : Fragment() {
         recyclerView.adapter = adapter
 
 
-
-
         val fab = view.findViewById<FloatingActionButton>(R.id.floatingActionButton)
         fab.setOnClickListener {
             val intent = Intent(activity, TaskActivity::class.java)
             startActivityForResult(intent, ADD_TASK_REQUEST_CODE)
+        }
+
+        val imageView = view.findViewById<ImageView>(R.id.imageView)
+        imageView.setOnClickListener {
+            val intent = Intent(activity, UserInfoActivity::class.java)
+            startActivity(intent)
         }
 
 
@@ -94,6 +102,10 @@ class TaskListFragment : Fragment() {
             val userInfo = Api.userService.getInfo().body()!!
             val userInfoTextView = view?.findViewById<TextView>(R.id.infoUserTextView)
             userInfoTextView?.text = "${userInfo.firstName} ${userInfo.lastName}"
+            val imageView = view?.findViewById<ImageView>(R.id.imageView)
+            imageView?.load(userInfo.avatar) {
+                transformations(CircleCropTransformation())
+            }
         }
 
     }
