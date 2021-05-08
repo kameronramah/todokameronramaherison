@@ -85,6 +85,7 @@ class UserInfoActivity : AppCompatActivity() {
             shouldShowRequestPermissionRationale(Manifest.permission.CAMERA) -> showExplanationDialog()
             else -> requestCameraPermission()
         }
+
     }
 
     private fun showExplanationDialog() {
@@ -106,6 +107,11 @@ class UserInfoActivity : AppCompatActivity() {
     private suspend fun handleImage(uri: Uri) {
         val mp = convert(uri)
         updateAvatar(mp)
+        val userInfo = Api.userService.getInfo().body()!!
+        val imageView = findViewById<ImageView>(R.id.image_view)
+        imageView?.load(userInfo.avatar) {
+            transformations(CircleCropTransformation())
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
